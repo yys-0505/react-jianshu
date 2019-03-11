@@ -1,0 +1,19 @@
+import { fromJS } from 'immutable'
+import * as constants from './constants'
+
+const defaultState = fromJS({
+  login: false
+});
+
+const reducer = (state = defaultState, action) => {
+  switch(action.type) {
+    case constants.SET_LOGIN:
+      return state.set("login", action.value);
+    case constants.LOGOUT:
+      return state.set("login", action.value);
+    default:
+      return state;
+  }
+}
+
+export default reducer;

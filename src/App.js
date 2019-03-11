@@ -1,26 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { PureComponent } from 'react';
+import { Provider } from 'react-redux'
+import { HashRouter as Router, Route } from 'react-router-dom'
+import Header from './common/header'
+import store from './store'
+import Home from './pages/home';
+import Detail from './pages/detail/loadable'
+import Login from './pages/login'
+import Write from './pages/write'
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Provider store={store}>
+        <Router>
+          <div>
+            <Header />
+            <Route exact path="/" component={Home}></Route>
+            <Route exact path="/login" component={Login}></Route>
+            <Route exact path="/write" component={Write}></Route>
+            <Route exact path="/detail/:id" component={Detail}></Route>
+          </div>
+        </Router>
+      </Provider>
     );
   }
 }
